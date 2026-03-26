@@ -1,0 +1,10 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "esModuleInterop": true,
+        "types": ["jest"]
+    },
+    "include": ["src/**/*", "src/**/__tests__/**/*"]
+}

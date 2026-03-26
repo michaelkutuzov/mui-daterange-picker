@@ -3,7 +3,6 @@ import {
   startOfMonth,
   endOfWeek,
   endOfMonth,
-  isBefore,
   addDays,
   isSameDay,
   isWithinInterval,
@@ -13,62 +12,54 @@ import {
   isValid,
   min,
   max,
+  differenceInCalendarDays,
 } from "date-fns";
 import type { DateRange } from "./types";
 
+type Falsy = false | null | undefined | 0 | "";
+
 export const identity = <T>(x: T) => x;
 
-export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] =>
-  Array.from({ length: Math.ceil(array.length / size) }, (_v, i) => array.slice(i * size, i * size + size));
+export const chunks = <T>(array: ReadonlyArray<T>, size: number): T[][] => {
+  return size > 0
+    ? Array.from({ length: Math.ceil(array.length / size) }, (_, i) => array.slice(i * size, i * size + size))
+    : [[...array]];
+};
 
 // Date
 export const getDaysInMonth = (date: Date, locale?: Locale) => {
   const startWeek = startOfWeek(startOfMonth(date), { locale });
   const endWeek = endOfWeek(endOfMonth(date), { locale });
-  const days = [];
-  for (let curr = startWeek; isBefore(curr, endWeek); ) {
-    days.push(curr);
-    curr = addDays(curr, 1);
-  }
+  const diff = differenceInCalendarDays(endWeek, startWeek);
+
+  const days = Array.from({ length: diff + 1 }, (_, i) => addDays(startWeek, i));
+
   return days;
 };
 
 export const isStartOfRange = ({ startDate }: DateRange, day: Date) =>
-  (startDate && isSameDay(day, startDate)) as boolean;
+  startDate !== undefined && isSameDay(day, startDate);
 
-export const isEndOfRange = ({ endDate }: DateRange, day: Date) => (endDate && isSameDay(day, endDate)) as boolean;
+export const isEndOfRange = ({ endDate }: DateRange, day: Date) => endDate !== undefined && isSameDay(day, endDate);
 
 export const inDateRange = ({ startDate, endDate }: DateRange, day: Date) =>
-  (startDate &&
-    endDate &&
-    (isWithinInterval(day, { start: startDate, end: endDate }) ||
-      isSameDay(day, startDate) ||
-      isSameDay(day, endDate))) as boolean;
+  startDate !== undefined && endDate !== undefined && isWithinInterval(day, { start: startDate, end: endDate });
 
-export const isRangeSameDay = ({ startDate, endDate }: DateRange) => {
-  if (startDate && endDate) {
-    return isSameDay(startDate, endDate);
-  }
-  return false;
-};
-
-type Falsy = false | null | undefined | 0 | "";
+export const isRangeSameDay = ({ startDate, endDate }: DateRange) =>
+  startDate !== undefined && endDate !== undefined && isSameDay(startDate, endDate);
 
 export const parseOptionalDate = (date: Date | string | Falsy, defaultValue: Date) => {
-  if (date) {
-    const parsed = date instanceof Date ? date : parseISO(date);
-    if (isValid(parsed)) return parsed;
-  }
-  return defaultValue;
+  if (!date) return defaultValue;
+  const parsed = date instanceof Date ? date : parseISO(date);
+
+  return isValid(parsed) ? parsed : defaultValue;
 };
 
-export const getValidatedMonths = (range: DateRange, minDate: Date, maxDate: Date) => {
-  const { startDate, endDate } = range;
-  if (startDate && endDate) {
-    const newStart = max([startDate, minDate]);
-    const newEnd = min([endDate, maxDate]);
+export const getValidatedMonths = ({ startDate, endDate }: DateRange, minDate: Date, maxDate: Date) => {
+  if (startDate === undefined || endDate === undefined) return [startDate, endDate];
 
-    return [newStart, isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd];
-  }
-  return [startDate, endDate];
+  const newStart = max([startDate, minDate]);
+  const newEnd = min([endDate, maxDate]);
+
+  return [newStart, isSameMonth(newStart, newEnd) ? addMonths(newStart, 1) : newEnd];
 };

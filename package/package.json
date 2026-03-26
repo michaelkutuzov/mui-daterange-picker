@@ -16,7 +16,8 @@
         "lint": "./node_modules/.bin/eslint ./src --ext .js,.jsx,.ts,.tsx",
         "build": "rollup -c",
         "copy_publish_files": "cp ../README.md .",
-        "prepublish": "pnpm run build && pnpm run copy_publish_files"
+        "prepublish": "pnpm run build && pnpm run copy_publish_files",
+        "test": "jest"
     },
     "peerDependencies": {
         "@babel/runtime": "^7.16.7",
@@ -59,7 +60,7 @@
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-node-resolve": "^13.1.2",
         "@rollup/plugin-url": "^6.1.0",
-        "@types/jest": "^27.4.0",
+        "@types/jest": "^30.0.0",
         "@types/lodash.isequal": "^4.5.5",
         "@types/react": "^17.0.38",
         "@typescript-eslint/eslint-plugin": "^5.8.1",
@@ -73,13 +74,15 @@
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
+        "jest": "^30.3.0",
         "react": "^17.0.2",
         "react-dom": "17.0.2",
         "react-scripts": "^5.0.0",
         "rollup": "^2.62.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-typescript2": "^0.31.1",
-        "typescript": "^4.5.4"
+        "ts-jest": "^29.4.6",
+        "typescript": "^5.9.3"
     },
     "dependencies": {
         "@babel/runtime": "^7.16.7"

@@ -16,9 +16,8 @@
         "strictNullChecks": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "allowSyntheticDefaultImports": true,
-        "verbatimModuleSyntax": true
+        "allowSyntheticDefaultImports": true
     },
-    "include": ["./package/src"],
+    "include": ["./package"],
     "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
 }
