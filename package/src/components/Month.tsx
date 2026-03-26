@@ -9,7 +9,8 @@ import {
 import Header from "./Header";
 import Day from "./Day";
 
-import { NavigationAction, DateRange } from "../types";
+import type { DateRange } from "../types";
+import { NavigationAction } from "../types";
 
 
 interface MonthProps {

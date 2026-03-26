@@ -1,4 +1,5 @@
-import {FormControl, Grid, IconButton, MenuItem, Select, SelectChangeEvent} from '@mui/material';
+import type { SelectChangeEvent} from '@mui/material';
+import {FormControl, Grid, IconButton, MenuItem, Select} from '@mui/material';
 import React from 'react';
 import ChevronLeft from '@mui/icons-material/ChevronLeft';
 import ChevronRight from '@mui/icons-material/ChevronRight';

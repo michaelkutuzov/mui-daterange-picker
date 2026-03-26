@@ -5,7 +5,7 @@ import {differenceInCalendarMonths, format} from 'date-fns';
 import ArrowRightAlt from '@mui/icons-material/ArrowRightAlt';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
-import {
+import type {
   DateRange,
   DefinedRange,
   Setter,

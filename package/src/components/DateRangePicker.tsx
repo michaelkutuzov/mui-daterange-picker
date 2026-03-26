@@ -2,11 +2,12 @@ import * as React from 'react';
 import {
   addMonths, addYears, isAfter, isBefore, isSameDay, isSameMonth, isWithinInterval, max, min,
 } from 'date-fns';
-import { DateRange, DefinedRange, NavigationAction } from '../types';
+import type { DateRange, DefinedRange, NavigationAction } from '../types';
 import { getValidatedMonths, parseOptionalDate } from '../utils';
 import { getDefaultRanges } from '../defaults';
 import Menu from './Menu';
-import { Marker, MARKERS } from './Markers';
+import type { Marker} from './Markers';
+import { MARKERS } from './Markers';
 
 interface DateRangePickerProps {
   open: boolean;
