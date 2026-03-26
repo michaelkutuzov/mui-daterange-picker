@@ -16,8 +16,12 @@
         "strictNullChecks": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@components/*": ["./src/components/*"],
+            "@root/*": ["./src/*"]
+        }
     },
-    "include": ["./package"],
+    "include": ["./src", "./tsconfig.spec.json", "./rollup.config.js", "./jest.config.js"],
     "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
 }

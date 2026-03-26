@@ -1,19 +1,14 @@
 import React from "react";
 import { Paper, Grid, Typography } from "@mui/material";
-import {
-  getDate, isSameMonth, isToday, format, isWithinInterval
-} from "date-fns";
-import {
-  chunks, getDaysInMonth, isStartOfRange, isEndOfRange, inDateRange, isRangeSameDay
-} from "../utils";
-import Header from "./Header";
-import Day from "./Day";
+import { getDate, isSameMonth, isToday, format, isWithinInterval } from "date-fns";
+import { chunks, getDaysInMonth, isStartOfRange, isEndOfRange, inDateRange, isRangeSameDay } from "../../utils";
+import Header from "../Header";
+import Day from "../Day";
 
-import type { DateRange } from "../types";
-import { NavigationAction } from "../types";
+import type { DateRange } from "../../types";
+import { NavigationAction } from "../../types";
 
-
-interface MonthProps {
+export interface MonthProps {
   value: Date;
   marker: symbol;
   dateRange: DateRange;
@@ -37,23 +32,16 @@ interface MonthProps {
   locale?: Locale;
 }
 
-const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
-  const {
-    helpers,
-    handlers,
-    value: date,
-    dateRange,
-    marker,
-    setValue: setDate,
-    minDate,
-    maxDate,
-    locale
-  } = props;
+export const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
+  const { helpers, handlers, value: date, dateRange, marker, setValue: setDate, minDate, maxDate, locale } = props;
 
   const weekStartsOn = locale?.options?.weekStartsOn || 0;
-  const WEEK_DAYS = typeof locale !== 'undefined'
-    ? [...Array(7).keys()].map(d => locale.localize?.day((d+weekStartsOn) % 7, {width: 'short', context: 'standalone'}))
-    : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const WEEK_DAYS =
+    typeof locale !== "undefined"
+      ? [...Array(7).keys()].map((d) =>
+          locale.localize?.day((d + weekStartsOn) % 7, { width: "short", context: "standalone" }),
+        )
+      : ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
   const [back, forward] = props.navState;
 
   return (
@@ -70,14 +58,13 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
         />
 
         <Grid
-          item
           container
           direction="row"
           justifyContent="space-between"
           sx={{
             marginTop: "10px",
             paddingLeft: "30px",
-            paddingRight: "30px"
+            paddingRight: "30px",
           }}
         >
           {WEEK_DAYS.map((day, index) => (
@@ -88,15 +75,14 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
         </Grid>
 
         <Grid
-          item
           container
           direction="column"
           justifyContent="space-between"
           sx={{
-            paddingLeft: '15px',
-            paddingRight: '15px',
-            marginTop: '15px',
-            marginBottom: '20px'
+            paddingLeft: "15px",
+            paddingRight: "15px",
+            marginTop: "15px",
+            marginBottom: "20px",
           }}
         >
           {chunks(getDaysInMonth(date, locale), 7).map((week, idx) => (
@@ -113,10 +99,7 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
                     filled={isStart || isEnd}
                     outlined={isToday(day)}
                     highlighted={highlighted && !isRangeOneDay}
-                    disabled={
-                      !isSameMonth(date, day)
-                      || !isWithinInterval(day, { start: minDate, end: maxDate })
-                    }
+                    disabled={!isSameMonth(date, day) || !isWithinInterval(day, { start: minDate, end: maxDate })}
                     startOfRange={isStart && !isRangeOneDay}
                     endOfRange={isEnd && !isRangeOneDay}
                     onClick={() => handlers.onDayClick(day)}
@@ -132,5 +115,3 @@ const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) => {
     </Paper>
   );
 };
-
-export default Month;

@@ -3,7 +3,7 @@ import { addMonths, addYears, isAfter, isBefore, isSameDay, isSameMonth, isWithi
 import type { DateRange, DefinedRange, NavigationAction } from "../../types";
 import { getValidatedMonths, parseOptionalDate } from "../../utils";
 import { getDefaultRanges } from "../../defaults";
-import Menu from "../Menu";
+import { Menu } from "../Menu";
 import type { Marker } from "../Markers";
 import { MARKERS } from "../Markers";
 

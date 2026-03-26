@@ -1,10 +1,10 @@
 {
-    "extends": "../tsconfig.json",
+    "extends": "./tsconfig.json",
     "compilerOptions": {
+        "baseUrl": "src",
         "noUnusedLocals": false,
         "noUnusedParameters": false,
-        "esModuleInterop": true,
-        "types": ["jest"]
+        "esModuleInterop": true
     },
     "include": ["src/**/*", "src/**/__tests__/**/*"]
 }

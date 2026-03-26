@@ -7,6 +7,7 @@
     "repository": "mmkutuzov/mui-daterange-picker",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
+    "type": "module",
     "jsnext:main": "dist/index.es.js",
     "engines": {
         "node": ">=8",
@@ -17,18 +18,19 @@
         "build": "rollup -c",
         "copy_publish_files": "cp ../README.md .",
         "prepublish": "pnpm run build && pnpm run copy_publish_files",
-        "test": "jest"
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "storybook": "ladle serve"
     },
     "peerDependencies": {
-        "@babel/runtime": "^7.16.7",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^5.0.4",
-        "@mui/material": "^5.2.6",
-        "@mui/system": "^5.0.6",
+        "@mui/material": "^7.3.9",
         "date-fns": "^2.28.0",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
+        "react": "^19.2.4",
+        "react-dom": "19.2.4"
     },
     "devDependencies": {
         "@babel/core": "^7.16.7",
@@ -55,8 +57,9 @@
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
         "@mui/icons-material": "^5.0.4",
-        "@mui/material": "^5.2.6",
-        "@rollup/plugin-babel": "^5.3.0",
+        "@mui/material": "^7.3.9",
+        "@rollup/plugin-alias": "^6.0.0",
+        "@rollup/plugin-babel": "^7.0.0",
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-node-resolve": "^13.1.2",
         "@rollup/plugin-typescript": "^12.3.0",
@@ -77,16 +80,17 @@
         "eslint-plugin-react-hooks": "^4.3.0",
         "jest": "^30.3.0",
         "react": "^19.2.4",
-        "react-dom": "19.2.4",
+        "react-dom": "^19.2.4",
         "react-scripts": "^5.0.0",
-        "rollup": "^2.62.0",
+        "rollup": "^3.30.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "ts-jest": "^29.4.6",
         "typescript": "^5.9.3"
     },
     "dependencies": {
         "@babel/runtime": "^7.16.7",
-        "@ladle/react": "^5.1.1"
+        "@ladle/react": "^5.1.1",
+        "@mui/system": "^7.3.9"
     },
     "keywords": [
         "mui7",

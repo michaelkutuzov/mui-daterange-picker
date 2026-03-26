@@ -8,9 +8,13 @@ module.exports = {
   transform: {
     ...tsJestTransformCfg,
   },
+  moduleNameMapper: {
+    "^@components/(.*)$": "<rootDir>/src/components/$1",
+    "^@root/(.*)$": "<rootDir>/src/$1",
+  },
   globals: {
     "ts-jest": {
-      tsconfig: "./tsconfig.json",
+      tsconfig: "./tsconfig.spec.json",
     },
   },
 };
