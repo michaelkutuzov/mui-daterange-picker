@@ -5,49 +5,48 @@ module.exports = {
     node: true,
   },
   settings: {
-    "react": {
-      "version": "detect",
+    react: {
+      version: "detect",
     },
-    'import/resolver': {
+    "import/resolver": {
       node: {
-        paths: ['src'],
-        extensions: [
-          '.js',
-          '.ts',
-          '.jsx',
-          '.tsx',
-        ],
+        paths: ["src"],
+        extensions: [".js", ".ts", ".jsx", ".tsx"],
       },
     },
   },
   extends: [
-    'plugin:react/recommended',
+    "plugin:react/recommended",
     // 'airbnb',
   ],
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
   },
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ["react", "@typescript-eslint"],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
-    'react/jsx-props-no-spreading': 0,
-    'import/extensions': 0,
-    'react/function-component-definition': 'off',
-    'no-unused-vars': 'warn',
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": [1, { extensions: [".tsx", ".jsx"] }],
+    "react/jsx-props-no-spreading": 0,
+    "import/extensions": 0,
+    "react/function-component-definition": "off",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        prefer: "type-imports",
+        fixStyle: "separate-type-imports",
+      },
+    ],
   },
 };
