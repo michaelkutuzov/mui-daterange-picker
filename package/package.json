@@ -59,6 +59,7 @@
         "@rollup/plugin-babel": "^5.3.0",
         "@rollup/plugin-commonjs": "^21.0.1",
         "@rollup/plugin-node-resolve": "^13.1.2",
+        "@rollup/plugin-typescript": "^12.3.0",
         "@rollup/plugin-url": "^6.1.0",
         "@types/jest": "^30.0.0",
         "@types/lodash.isequal": "^4.5.5",
@@ -75,17 +76,17 @@
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
         "jest": "^30.3.0",
-        "react": "^17.0.2",
-        "react-dom": "17.0.2",
+        "react": "^19.2.4",
+        "react-dom": "19.2.4",
         "react-scripts": "^5.0.0",
         "rollup": "^2.62.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
-        "rollup-plugin-typescript2": "^0.31.1",
         "ts-jest": "^29.4.6",
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "@babel/runtime": "^7.16.7"
+        "@babel/runtime": "^7.16.7",
+        "@ladle/react": "^5.1.1"
     },
     "keywords": [
         "mui7",
