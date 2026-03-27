@@ -7,7 +7,6 @@
     "repository": "mmkutuzov/mui-daterange-picker",
     "main": "dist/index.js",
     "module": "dist/index.es.js",
-    "type": "module",
     "jsnext:main": "dist/index.es.js",
     "engines": {
         "node": ">=8",
@@ -16,8 +15,7 @@
     "scripts": {
         "lint": "./node_modules/.bin/eslint ./src --ext .js,.jsx,.ts,.tsx",
         "build": "rollup -c",
-        "copy_publish_files": "cp ../README.md .",
-        "prepublish": "pnpm run build && pnpm run copy_publish_files",
+        "prepublish": "pnpm run build",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
