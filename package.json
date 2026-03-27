@@ -104,5 +104,8 @@
         "typescript",
         "npm",
         "package"
-    ]
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
 }
