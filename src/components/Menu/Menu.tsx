@@ -7,10 +7,11 @@ import { Month } from "@components/Month";
 import { DefinedRanges } from "../DefinedRanges";
 import type { DateRange, DefinedRange, Setter, NavigationAction } from "../../types";
 import { MARKERS } from "../Markers";
+import { DisplayOptions } from "@components/DateRangePicker/DateRangePicker";
 
 export interface MenuProps {
   dateRange: DateRange;
-  ranges?: DefinedRange[];
+  ranges: DefinedRange[];
   minDate: Date;
   maxDate: Date;
   firstMonth: Date;
@@ -19,18 +20,15 @@ export interface MenuProps {
   setSecondMonth: Setter<Date>;
   setDateRange: Setter<DateRange>;
   helpers: {
-    // eslint-disable-next-line no-unused-vars
     inHoverRange: (day: Date) => boolean;
   };
   handlers: {
-    // eslint-disable-next-line no-unused-vars
     onDayClick: (day: Date) => void;
-    // eslint-disable-next-line no-unused-vars
     onDayHover: (day: Date) => void;
-    // eslint-disable-next-line no-unused-vars
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
   locale?: Locale;
+  displayOptions?: DisplayOptions;
 }
 
 export const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -49,6 +47,7 @@ export const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     locale,
   } = props;
 
+  const { showPredefinedRanges, showStartEndDates } = props.displayOptions || {};
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = {
@@ -61,7 +60,7 @@ export const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   return (
     <Paper elevation={5} square sx={{ width: "fit-content" }}>
       <Grid container direction="row" wrap="nowrap" justifyContent="center" alignItems="center">
-        {ranges && (
+        {showPredefinedRanges && (
           <>
             <Grid>
               <DefinedRanges selectedRange={dateRange} ranges={ranges} setRange={setDateRange} />
@@ -70,22 +69,26 @@ export const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
           </>
         )}
         <Grid>
-          <Grid container sx={{ padding: "20px 70px" }} alignItems="center">
-            <Grid sx={{ flex: 1, textAlign: "center" }}>
-              <Typography variant="subtitle1">
-                {startDate ? format(startDate, "dd MMMM yyyy", { locale }) : "Start Date"}
-              </Typography>
-            </Grid>
-            <Grid sx={{ flex: 1, textAlign: "center" }}>
-              <ArrowRightAlt color="action" />
-            </Grid>
-            <Grid sx={{ flex: 1, textAlign: "center" }}>
-              <Typography variant="subtitle1">
-                {endDate ? format(endDate, "dd MMMM yyyy", { locale }) : "End Date"}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Divider />
+          {showStartEndDates && (
+            <>
+              <Grid container sx={{ padding: "20px 70px" }} alignItems="center">
+                <Grid sx={{ flex: 1, textAlign: "center" }}>
+                  <Typography variant="subtitle1">
+                    {startDate ? format(startDate, "dd MMMM yyyy", { locale }) : "Start Date"}
+                  </Typography>
+                </Grid>
+                <Grid sx={{ flex: 1, textAlign: "center" }}>
+                  <ArrowRightAlt color="action" />
+                </Grid>
+                <Grid sx={{ flex: 1, textAlign: "center" }}>
+                  <Typography variant="subtitle1">
+                    {endDate ? format(endDate, "dd MMMM yyyy", { locale }) : "End Date"}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Divider />
+            </>
+          )}
           <Grid container direction="row" justifyContent="center" wrap="nowrap">
             <Month
               {...commonProps}

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ru } from "date-fns/locale";
 import { DateRangePicker } from "./DateRangePicker";
-import { getDefaultRanges } from "@root/defaults";
 
 export const Default = () => {
   return (
@@ -10,7 +9,6 @@ export const Default = () => {
       onChange={(range) => {
         console.log(range);
       }}
-      definedRanges={getDefaultRanges(new Date())}
     />
   );
 };
@@ -21,7 +19,19 @@ export const WithoutDefinedRanges = () => {
       onChange={(range) => {
         console.log(range);
       }}
-      definedRanges={getDefaultRanges(new Date())}
+      displayOptions={{ showPredefinedRanges: false, showStartEndDates: true }}
+    />
+  );
+};
+
+export const WithoutStartEndDates = () => {
+  return (
+    <DateRangePicker
+      open={true}
+      onChange={(range) => {
+        console.log(range);
+      }}
+      displayOptions={{ showPredefinedRanges: true, showStartEndDates: false }}
     />
   );
 };
@@ -34,6 +44,7 @@ export const Russian = () => {
         console.log(range);
       }}
       locale={ru}
+      displayOptions={{ showPredefinedRanges: false, showStartEndDates: false }}
     />
   );
 };

@@ -5,6 +5,12 @@ import { getValidatedMonths, parseOptionalDate } from "../../utils";
 import { Menu } from "../Menu";
 import type { Marker } from "../Markers";
 import { MARKERS } from "../Markers";
+import { getDefaultRanges } from "@root/defaults";
+
+export type DisplayOptions = {
+  showPredefinedRanges?: boolean;
+  showStartEndDates?: boolean;
+};
 
 interface DateRangePickerProps {
   open: boolean;
@@ -14,7 +20,13 @@ interface DateRangePickerProps {
   maxDate?: Date | string;
   onChange: (dateRange: DateRange) => void;
   locale?: Locale;
+  displayOptions?: DisplayOptions;
 }
+
+const DEFAULT_DISPLAY_OPTIONS: DisplayOptions = {
+  showPredefinedRanges: true,
+  showStartEndDates: true,
+};
 
 export const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (props: DateRangePickerProps) => {
   const today = new Date();
@@ -25,8 +37,9 @@ export const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (p
     initialDateRange,
     minDate,
     maxDate,
-    definedRanges, // = getDefaultRanges(new Date(), props.locale),
+    definedRanges = getDefaultRanges(new Date(), props.locale),
     locale,
+    displayOptions = DEFAULT_DISPLAY_OPTIONS,
   } = props;
 
   const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -137,6 +150,7 @@ export const DateRangePicker: React.FunctionComponent<DateRangePickerProps> = (p
       helpers={helpers}
       handlers={handlers}
       locale={locale}
+      displayOptions={displayOptions}
     />
   ) : null;
 };
