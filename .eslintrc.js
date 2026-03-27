@@ -40,7 +40,8 @@ module.exports = {
     "react/jsx-props-no-spreading": 0,
     "import/extensions": 0,
     "react/function-component-definition": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/consistent-type-imports": [
       "error",
       {

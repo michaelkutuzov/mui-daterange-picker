@@ -5,7 +5,7 @@ import ChevronLeft from "@mui/icons-material/ChevronLeft";
 import ChevronRight from "@mui/icons-material/ChevronRight";
 import { getMonth, getYear, setMonth, setYear } from "date-fns";
 
-interface HeaderProps {
+export interface HeaderProps {
   date: Date;
   // eslint-disable-next-line no-unused-vars
   setDate: (date: Date) => void;
@@ -20,10 +20,10 @@ const generateYears = (relativeTo: Date, count: number) => {
   const half = Math.floor(count / 2);
   return Array(count)
     .fill(0)
-    .map((_y, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
+    .map((_y, i) => relativeTo.getFullYear() - half + i);
 };
 
-const Header: React.FunctionComponent<HeaderProps> = ({
+export const Header: React.FunctionComponent<HeaderProps> = ({
   date,
   setDate,
   nextDisabled,
@@ -51,15 +51,9 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     <Grid container justifyContent="space-between" alignItems="center">
       <Grid sx={{ padding: "5px" }}>
         <IconButton
-          sx={{
-            padding: "10px",
-            "&:hover": {
-              background: "none",
-            },
-          }}
+          sx={{ padding: "10px", "&:hover": { background: "none" } }}
           disabled={prevDisabled}
           onClick={onClickPrevious}
-          // size="large"
         >
           <ChevronLeft color={prevDisabled ? "disabled" : "action"} />
         </IconButton>
@@ -75,7 +69,6 @@ const Header: React.FunctionComponent<HeaderProps> = ({
           </Select>
         </FormControl>
       </Grid>
-
       <Grid>
         <FormControl variant="standard">
           <Select value={getYear(date)} onChange={handleYearChange} MenuProps={{ disablePortal: true }}>
@@ -86,20 +79,12 @@ const Header: React.FunctionComponent<HeaderProps> = ({
             ))}
           </Select>
         </FormControl>
-
-        {/* <Typography>{format(date, "MMMM YYYY")}</Typography> */}
       </Grid>
       <Grid sx={{ padding: "5px" }}>
         <IconButton
-          sx={{
-            padding: "10px",
-            "&:hover": {
-              background: "none",
-            },
-          }}
+          sx={{ padding: "10px", "&:hover": { background: "none" } }}
           disabled={nextDisabled}
           onClick={onClickNext}
-          // size="large"
         >
           <ChevronRight color={nextDisabled ? "disabled" : "action"} />
         </IconButton>
@@ -107,5 +92,3 @@ const Header: React.FunctionComponent<HeaderProps> = ({
     </Grid>
   );
 };
-
-export default Header;

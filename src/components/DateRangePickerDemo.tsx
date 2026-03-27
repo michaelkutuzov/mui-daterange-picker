@@ -6,22 +6,21 @@ import { DateRangePicker } from "./DateRangePicker";
 // eslint-disable-next-line no-unused-vars
 import type { DateRange, DefinedRange } from "../types";
 
-export interface DateRangePickerWrapperProps {
+export interface DateRangePickerDemoProps {
   open: boolean;
   toggle: () => void;
   initialDateRange?: DateRange;
   definedRanges?: DefinedRange[];
   minDate?: Date | string;
   maxDate?: Date | string;
-  // eslint-disable-next-line no-unused-vars
   onChange: (dateRange: DateRange) => void;
   closeOnClickOutside?: boolean;
   wrapperClassName?: string;
   locale?: Locale;
 }
 
-const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProps> = (
-  props: DateRangePickerWrapperProps,
+export const DateRangePickerDemo: React.FunctionComponent<DateRangePickerDemoProps> = (
+  props: DateRangePickerDemoProps,
 ) => {
   const { closeOnClickOutside, wrapperClassName, toggle, open } = props;
 
@@ -60,5 +59,3 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
     </Box>
   );
 };
-
-export default DateRangePickerWrapper;

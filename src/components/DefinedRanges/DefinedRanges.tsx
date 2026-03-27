@@ -1,9 +1,9 @@
 import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { isSameDay } from "date-fns";
-import type { DateRange, DefinedRange } from "../types";
+import type { DateRange, DefinedRange } from "../../types";
 
-type DefinedRangesProps = {
+export type DefinedRangesProps = {
   // eslint-disable-next-line no-unused-vars
   setRange: (range: DateRange) => void;
   selectedRange: DateRange;
@@ -19,7 +19,7 @@ const isSameRange = (first: DateRange, second: DateRange) => {
   return false;
 };
 
-const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = ({
+export const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = ({
   ranges,
   setRange,
   selectedRange,
@@ -30,24 +30,18 @@ const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = ({
         key={idx}
         onClick={() => setRange(range)}
         sx={[
-          {
-            cursor: "pointer",
-          },
+          { cursor: "pointer" },
           isSameRange(range, selectedRange) && {
             backgroundColor: (theme) => theme.palette.primary.dark,
             color: "primary.contrastText",
-            "&:hover": {
-              color: "inherit",
-            },
+            "&:hover": { color: "inherit" },
           },
         ]}
       >
         <ListItemText
           primaryTypographyProps={{
             variant: "body2",
-            sx: {
-              fontWeight: isSameRange(range, selectedRange) ? "bold" : "normal",
-            },
+            sx: { fontWeight: isSameRange(range, selectedRange) ? "bold" : "normal" },
           }}
         >
           {range.label}
@@ -56,5 +50,3 @@ const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = ({
     ))}
   </List>
 );
-
-export default DefinedRanges;

@@ -4,13 +4,13 @@ import { Divider, Grid, Paper, Typography } from "@mui/material";
 import { differenceInCalendarMonths, format } from "date-fns";
 import ArrowRightAlt from "@mui/icons-material/ArrowRightAlt";
 import { Month } from "@components/Month";
-import DefinedRanges from "../DefinedRanges";
+import { DefinedRanges } from "../DefinedRanges";
 import type { DateRange, DefinedRange, Setter, NavigationAction } from "../../types";
 import { MARKERS } from "../Markers";
 
 export interface MenuProps {
   dateRange: DateRange;
-  ranges: DefinedRange[];
+  ranges?: DefinedRange[];
   minDate: Date;
   maxDate: Date;
   firstMonth: Date;
@@ -59,12 +59,16 @@ export const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     handlers,
   };
   return (
-    <Paper elevation={5} square>
-      <Grid container direction="row" wrap="nowrap">
-        <Grid>
-          <DefinedRanges selectedRange={dateRange} ranges={ranges} setRange={setDateRange} />
-        </Grid>
-        <Divider orientation="vertical" flexItem />
+    <Paper elevation={5} square sx={{ width: "fit-content" }}>
+      <Grid container direction="row" wrap="nowrap" justifyContent="center" alignItems="center">
+        {ranges && (
+          <>
+            <Grid>
+              <DefinedRanges selectedRange={dateRange} ranges={ranges} setRange={setDateRange} />
+            </Grid>
+            <Divider orientation="vertical" flexItem />
+          </>
+        )}
         <Grid>
           <Grid container sx={{ padding: "20px 70px" }} alignItems="center">
             <Grid sx={{ flex: 1, textAlign: "center" }}>

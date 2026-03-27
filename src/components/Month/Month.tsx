@@ -2,8 +2,8 @@ import React from "react";
 import { Paper, Grid, Typography } from "@mui/material";
 import { getDate, isSameMonth, isToday, format, isWithinInterval } from "date-fns";
 import { chunks, getDaysInMonth, isStartOfRange, isEndOfRange, inDateRange, isRangeSameDay } from "../../utils";
-import Header from "../Header";
-import Day from "../Day";
+import { Header } from "../Header";
+import { Day } from "../Day";
 
 import type { DateRange } from "../../types";
 import { NavigationAction } from "../../types";
@@ -15,18 +15,13 @@ export interface MonthProps {
   minDate: Date;
   maxDate: Date;
   navState: [boolean, boolean];
-  // eslint-disable-next-line no-unused-vars
   setValue: (date: Date) => void;
   helpers: {
-    // eslint-disable-next-line no-unused-vars
     inHoverRange: (day: Date) => boolean;
   };
   handlers: {
-    // eslint-disable-next-line no-unused-vars
     onDayClick: (day: Date) => void;
-    // eslint-disable-next-line no-unused-vars
     onDayHover: (day: Date) => void;
-    // eslint-disable-next-line no-unused-vars
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
   locale?: Locale;
@@ -46,7 +41,7 @@ export const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) =>
 
   return (
     <Paper square elevation={0} sx={{ width: 290 }}>
-      <Grid container>
+      <Grid container justifyContent="center" alignItems="center" direction="column">
         <Header
           date={date}
           setDate={setDate}
@@ -60,7 +55,7 @@ export const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) =>
         <Grid
           container
           direction="row"
-          justifyContent="space-between"
+          justifyContent="center"
           sx={{
             marginTop: "10px",
             paddingLeft: "30px",
@@ -68,7 +63,12 @@ export const Month: React.FunctionComponent<MonthProps> = (props: MonthProps) =>
           }}
         >
           {WEEK_DAYS.map((day, index) => (
-            <Typography color="textSecondary" key={index} variant="caption">
+            <Typography
+              color="textSecondary"
+              key={index}
+              variant="caption"
+              sx={{ display: "inline-block", minWidth: "30px", textAlign: "center" }}
+            >
               {day}
             </Typography>
           ))}
